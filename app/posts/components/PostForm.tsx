@@ -9,7 +9,7 @@ import React, { FC, useState } from 'react'
 
 interface PostFormProps {
     type: "ADD" | "UPDATE",
-    post?: Post
+    post?: Post,
 }
 
 const PostForm: FC<PostFormProps> = ({ type, post }) => {
@@ -25,9 +25,12 @@ const PostForm: FC<PostFormProps> = ({ type, post }) => {
             const data = Object.fromEntries(fd.entries());
 
             // Validation
-
-            const response = await fetch("/api/posts", {
-                method: "POST",
+            let url = "/api/posts";
+            if (type === "UPDATE") {
+                url = `/api/posts/${post?.id}`
+            }
+            const response = await fetch(url, {
+                method: type === "ADD" ? "POST" : "PUT",
                 headers: {
                     'Content-Type': "application/json"
                 },
