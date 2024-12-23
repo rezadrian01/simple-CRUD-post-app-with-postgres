@@ -9,10 +9,7 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
-import { Button } from "@/components/ui/button";
-import { Pencil } from 'lucide-react';
-import { FC } from "react";
-import Link from "next/link";
+import ActionButton from "./ActionButton";
 
 const PostTable = async () => {
     const response = await fetch(`${process.env.BASE_URL}/api/posts`);
@@ -48,12 +45,5 @@ const PostTable = async () => {
     </Table>
 }
 
-const ActionButton: FC<{ id: string }> = ({ id }) => {
-    return <>
-        <Link href={`/posts/${id}`}>
-            <Pencil size={15} />
-        </Link>
-    </>
-}
 
 export default PostTable

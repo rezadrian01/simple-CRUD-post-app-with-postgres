@@ -38,3 +38,17 @@ export const PUT = async (req: NextRequest, context: Context) => {
         console.log(error);
     }
 }
+
+export const DELETE = async (req: NextRequest, context: Context) => {
+    try {
+        const { id } = await context.params;
+        await prisma.post.delete({
+            where: {
+                id: id
+            }
+        })
+        return NextResponse.json({ success: true });
+    } catch (error) {
+        console.log(error);
+    }
+}
